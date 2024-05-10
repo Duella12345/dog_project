@@ -1,3 +1,4 @@
+# credit: created using https://geekpython.in/flask-app-for-image-recognition as template
 # Importing required libs
 import cv2
 from flask import Flask, render_template, request
