@@ -50,28 +50,38 @@ git clone https://github.com/Duella12345/dog_project.git
 cd dog-project
 ```
 
-2. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/dogImages`. 
+2. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location 
 
-3. Download the [human dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/lfw`.  If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
+`path/to/dog-project/dogImages`
 
-4. Download the [VGG-16 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
+3. Download the [human dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip).  Unzip the folder and place it in the repo, at location 
 
-5. Download the [Resnet-50 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogResnet50Data.npz) for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
+`path/to/dog-project/lfw`
+
+If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
+
+4. Download the [VGG-16 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) for the dog dataset.  Place it in the repo, at location 
+
+`path/to/dog-project/bottleneck_features`
+
+5. Download the [Resnet-50 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogResnet50Data.npz) for the dog dataset.  Place it in the repo, at location 
+
+`path/to/dog-project/bottleneck_features`
 
 6. Open the notebook and run all to see the development process.
 ```
 jupyter notebook dog_app.ipynb
 ```
 
-7. Run the following commands in the project's root directory to set up model, this may take a few minutes to run (check requirements file for required libraries).
-
-    - To run the model training pipeline:
+7. Run the following command in the project's root directory to set up model, this may take a few minutes to run (check requirements file for required libraries). To run the model training pipeline:
         
-        `python train_model.py` (using defaults)
+`python train_model.py`
 
 2. To run the app: go to `app` directory: `cd app`
 
-3. Run the web app: `flask --app app.py run`
+3. Run the web app: 
+
+`flask --app app.py run`
 
 4. Visit 'http://127.0.0.1:5000' to open the homepage
 
