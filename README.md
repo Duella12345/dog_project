@@ -94,3 +94,5 @@ jupyter notebook dog_app.ipynb
 6. See your prediction!
 
 ![alt text](images/Screenshot_prediction.png)
+
+credit: created using https://geekpython.in/flask-app-for-image-recognition as template and https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/ to help with uploading files

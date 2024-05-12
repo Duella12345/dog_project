@@ -1,9 +1,7 @@
 # credit: created using https://geekpython.in/flask-app-for-image-recognition as template 
 # and https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/ to help with uploading files
 # Importing required libs
-import io
-from PIL import Image
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request
 import os
 from werkzeug.utils import secure_filename
 
