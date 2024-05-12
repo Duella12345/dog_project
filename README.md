@@ -1,5 +1,6 @@
 
 # Dog Breed Classifer Project
+
 ![alt text](app_test_images/dog/dachshund-1519374_640.jpg)
 
 ### Summary
@@ -34,6 +35,7 @@ The project includes a Flask web app where a user can input a new image and get 
 	- train_model.py
 
 Screenshot of notebook output:
+
 ![alt text](images/Screenshot_app.png)
 
 
@@ -72,10 +74,13 @@ jupyter notebook dog_app.ipynb
 3. Run the web app: `flask --app app.py run`
 
 4. Visit 'http://127.0.0.1:5000' to open the homepage
+
 ![alt text](images/Screenshot_homepage.png)
 
 5. Click on 'choose file' and upload an image of a person or a dog and press submit (it may take a few moments)
+
 ![alt text](images/Screenshot_upload.png)
 
 6. See your prediction!
+
 ![alt text](images/Screenshot_prediction.png)
