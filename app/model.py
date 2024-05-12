@@ -9,6 +9,7 @@ from keras.applications.resnet50 import ResNet50
 from keras.layers import GlobalAveragePooling2D, Input
 from keras.layers import Dropout, Dense
 from keras.models import Sequential
+import re
 
 
 def extract_Resnet50(tensor):
@@ -104,11 +105,11 @@ def human_dog_identifier(img_path):
     
     # if dog_detector detects a dog
     if dog_detector(img_path) == True:
-        return "Hello, dog! You look like a ... " + ResNet50_predict_breed(img_path).split(".")[1]
+        return "Hello, dog! You look like a ... " + re.sub(r"[,.;@#?!&$']+\ *", " ", ResNet50_predict_breed(img_path).split(".")[1])
     
     # if face_detector detects a human
     elif face_detector(img_path) == True:
-        return "Hello, human! You look like a ... " + ResNet50_predict_breed(img_path).split(".")[1]
+        return "Hello, human! You look like a ... " + re.sub(r"[,.;@#?!&$']+\ *", " ", ResNet50_predict_breed(img_path).split(".")[1])
     
     else:
         return "ERROR: Please ensure images are all face on, are you sure you are a human/dog?"
