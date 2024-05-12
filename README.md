@@ -31,7 +31,7 @@ The project includes a Flask web app where a user can input a new image and get 
         - dog_app.ipynb
         - extract_bottleneck_features.py
     - LICENSE.txt
-	- requirements.txt
+	- requirements.txt (required libraries for running app and model)
 	- train_model.py
 
 Screenshot of notebook output:
@@ -63,7 +63,7 @@ cd dog-project
 jupyter notebook dog_app.ipynb
 ```
 
-7. Run the following commands in the project's root directory to set up model, this may take a few minutes to run.
+7. Run the following commands in the project's root directory to set up model, this may take a few minutes to run (check requirements file for required libraries).
 
     - To run the model training pipeline:
         
