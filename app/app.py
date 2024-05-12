@@ -1,4 +1,4 @@
-# credit: created using https://geekpython.in/flask-app-for-image-recognition as template 
+# credit: created using https://geekpython.in/flask-app-for-image-recognition for app helper code
 # and https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/ to help with uploading files
 # Importing required libs
 from flask import Flask, redirect, render_template, request
