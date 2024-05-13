@@ -5,7 +5,7 @@ from flask import Flask, redirect, render_template, request
 import os
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/images'
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 from model import human_dog_identifier
  
@@ -43,7 +43,9 @@ def predict_image_file():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-                return render_template("result.html", predictions=human_dog_identifier(UPLOAD_FOLDER + "/" + filename))
+                return render_template("result.html", 
+                predictions=human_dog_identifier(UPLOAD_FOLDER + "/" + filename)
+                image=UPLOAD_FOLDER + "/" + filename)
         return
  
     except Exception as e: 

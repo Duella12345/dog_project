@@ -96,3 +96,55 @@ jupyter notebook dog_app.ipynb
 ![alt text](images/Screenshot_prediction.png)
 
 credit: created using https://geekpython.in/flask-app-for-image-recognition for app helper code and https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/ to help with uploading files
+
+## High-level Overview
+
+Provide a concise introduction that outlines the purpose and scope of the project. Clearly communicate the problem statement and the significance of addressing it.
+## Description of Input Data
+
+Explain the dataset used for the project, including its source, format, and any relevant details. Provide insights into the variables and their significance in relation to the problem being solved.
+
+## Strategy for solving the problem
+
+Describe the overall approach and methodology employed to tackle the problem. Discuss any specific techniques, algorithms, or models used and the rationale behind their selection.
+
+## Discussion of the expected solution
+
+Present a detailed explanation of the proposed solution, including the overall architecture or workflow. Discuss how the various components fit together to address the problem and achieve the desired outcome.
+
+## Metrics with justification
+
+Identify and explain the evaluation metrics used to assess the performance of the solution. Justify the choice of these metrics based on their relevance to the problem and their ability to measure success effectively.
+
+## EDA
+
+Conduct an exploratory data analysis and document the key findings. Discuss any patterns, trends, or insights discovered through visualizations, statistical summaries, or other analytical techniques.
+
+## Data Preprocessing
+
+Outline the steps taken to preprocess the data, including any cleaning, transformation, or feature engineering techniques employed. Provide a clear and concise description of each preprocessing step and its purpose.
+
+## Modeling
+
+Present the details of the chosen model or models used in the project. Explain the underlying algorithms and any specific considerations or modifications made. Include relevant code snippets or pseudocode for clarity.
+
+## Hyperparameter Tuning
+
+Describe the process of hyperparameter tuning for the selected model. Discuss the techniques used, such as grid search or random search, and explain the rationale behind the chosen hyperparameter values.
+
+## Results
+
+Present the results of the model evaluation and performance. Include relevant metrics, visualizations, or other outputs that demonstrate the effectiveness of the solution. Interpret the results and highlight key insights or observations.
+
+## Comparison Table
+
+Provide a comprehensive comparison table that compares the performance of different models or variations within the project. Include relevant metrics and other relevant information to facilitate easy comparison.
+Conclusion: Summarize the key findings, insights, and conclusions derived from the project. Recap the main points and emphasize the success of the proposed solution. Discuss the implications or potential applications of the project's outcomes.
+
+## Improvements
+
+Identify any limitations, challenges, or areas for improvement in the project. Discuss potential enhancements or future directions that could further enhance the solution or address any remaining gaps.
+
+## Acknowledgment
+
+Acknowledge any individuals, organizations, or resources that have contributed to the project's success. Express gratitude and recognition for their support, guidance, or contributions.

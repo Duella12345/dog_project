@@ -16,7 +16,7 @@ Dog Detection
         <div class="col-lg-6 mx-auto">
  
             <!-- Upload image input-->
-            <form action="{{ url_for('predict_image_file') }}" enctype="multipart/form-data" method="POST">
+            <form action="{{image}}" enctype="multipart/form-data" method="POST">
                 <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
                     <input class="form-control border-0" id="upload" name="file" type="file">
                     <label class="font-weight-light text-muted" for="upload" id="upload-label">Choose file</label>
