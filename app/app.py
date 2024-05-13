@@ -24,7 +24,7 @@ def main():
  
  
 # Prediction route
-@app.route('/prediction', methods=['POST'])
+@app.route('/', methods=['POST', 'GET'])
 def predict_image_file():
     try:
         if request.method == 'POST':
@@ -42,11 +42,10 @@ def predict_image_file():
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                img = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-                return render_template("result.html", 
-                predictions=human_dog_identifier(UPLOAD_FOLDER + "/" + filename)
-                image=UPLOAD_FOLDER + "/" + filename)
-        return
+                return render_template("result.html", predictions=human_dog_identifier(img))
+        return render_template("result.html")
  
     except Exception as e: 
         print(e)

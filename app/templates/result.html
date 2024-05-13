@@ -1,23 +1,13 @@
-
-{% extends "layout.html"%}
-{% block title %}
-Dog Detection
-{% endblock %}
+{% extends "index.html"%}
  
 {% block content %}
-<div class="container py-5">
- 
-    <header class="text-white text-center">
-        <h1 class="display-4">Dog Detection</h1>
-        <p class="lead mb-5">You will see the prediction of the input image below.</p>
-    </header>
- 
-    <header class="text-white text-center">
-        <h1 class="display-5">Prediction</h1>
+<div class="container">
+    <header>
+        <h1 class="text-center">Result</h1>
         {% if predictions %}
-        <h2 class="display-4 text-dark font-weight-bold">{{predictions}}</h2>
+        <h2 class="text-center">{{predictions}}</h2>
         {% else %}
-        <h2 class="display-4 text-dark font-weight-bold">{{err}}</h2>
+        <h2 class="text-center">{{err}}</h2>
         {% endif %}
     </header>
 </div>
