@@ -12,27 +12,23 @@ The project includes a Flask web app where a user can input a new image and get 
  - Root Directory
     - app (files relating to the application and new predictions from model)
 		- static
-			- css
-				- custom.css (styling file)
 			- js
 				-image_upload.js (javascript for uploading image)
-        - templates
+        - templates (html templates)
             - index.html
-            - layout.html
 			- result.html
-		- uploads (folder for uploaded images)
-        - app.py
-		- dog_names.txt
-		- model.py
+        - app.py (flask app file)
+		- dog_names.txt (list of dog names for model categories)
+		- model.py (the app models)
     - app_test_images (folder containing images for final algorithm test)
 	- haarcascades
-	- images (images in notebook)
+	- images (images in notebook and readme)
     - notebook (notebooks used in developing the scripts)
         - dog_app.ipynb
         - extract_bottleneck_features.py
     - LICENSE.txt
 	- requirements.txt (required libraries for running app and model)
-	- train_model.py
+	- train_model.py (python to train model prior to using in app)
 
 Screenshot of notebook output:
 
@@ -95,56 +91,75 @@ jupyter notebook dog_app.ipynb
 
 ![alt text](images/Screenshot_prediction.png)
 
-credit: created using https://geekpython.in/flask-app-for-image-recognition for app helper code and https://flask.palletsprojects.com/en/2.3.x/patterns/fileuploads/ to help with uploading files
-
 ## High-level Overview
 
-Provide a concise introduction that outlines the purpose and scope of the project. Clearly communicate the problem statement and the significance of addressing it.
+In this project I have created an algorithm and used it to create a web app that accepts any user-supplied image as input.  If a dog is detected in the image, it provides an estimate of the dog's breed.  If a human is detected, it provides an estimate of the dog breed that they most resemble.  The image below displays potential sample output. 
+
+![alt text](images/Screenshot_prediction.png)
+
+The project pieces together a series of models to perform different tasks:
+
+1. an algorithm that detects humans in an image 
+2. an algorithm that detects a dog  in an image
+3. an algorithm that infers dog breed
+
 ## Description of Input Data
 
-Explain the dataset used for the project, including its source, format, and any relevant details. Provide insights into the variables and their significance in relation to the problem being solved.
+The dataset used for the project, includes a set of dog images `../dogImages/train` and human images `../lfw/lfw/*/*`.
+
+- `train_files`, `valid_files`, `test_files` - numpy arrays containing file paths to dog images
+- `train_targets`, `valid_targets`, `test_targets` - numpy arrays containing onehot-encoded classification labels 
+- `dog_names` - list of string-valued dog breed names for translating labels
+- `human_files` - numpy arrays containing file paths to human images
 
 ## Strategy for solving the problem
 
-Describe the overall approach and methodology employed to tackle the problem. Discuss any specific techniques, algorithms, or models used and the rationale behind their selection.
+This project approaches the problem by breaking the algorithm into 3 separate algorithms and then combining them into one final function.
 
-## Discussion of the expected solution
+### Discussion of the expected solution
 
-Present a detailed explanation of the proposed solution, including the overall architecture or workflow. Discuss how the various components fit together to address the problem and achieve the desired outcome.
+My proposed solution is to use a CNN that uses transfer learning from a pretrained image recognition model to infer the final dog breed plus two other algorithms, one to detectif it is a dog image and one to detect if it is a human image these will be combined to create the final overall algorithm.
 
-## Metrics with justification
+1. an algorithm that detects humans in an image - I use OpenCV's implementation of [Haar feature-based cascade classifiers](http://docs.opencv.org/trunk/d7/d8b/tutorial_py_face_detection.html) to detect human faces in images.  OpenCV provides many pre-trained face detectors, stored as XML files on [github](https://github.com/opencv/opencv/tree/master/data/haarcascades). I have downloaded one of these detectors and stored it in the `haarcascades` directory
 
-Identify and explain the evaluation metrics used to assess the performance of the solution. Justify the choice of these metrics based on their relevance to the problem and their ability to measure success effectively.
+2. an algorithm that detects a dog in an image using a a pre-trained [ResNet-50](http://ethereon.github.io/netscope/#/gist/db945b393d40bfa26006) model to detect dogs in images.  Our first line of code downloads the ResNet-50 model, along with weights that have been trained on [ImageNet](http://www.image-net.org/), this model will categorise the image and check if it is in the range of dog breed categories within the ResNet-50 model.
+3. an algorithm that infers dog breed using a CNN that uses transfer learning from a pretrained image recognition model.
 
-## EDA
+### Metrics with justification
 
-Conduct an exploratory data analysis and document the key findings. Discuss any patterns, trends, or insights discovered through visualizations, statistical summaries, or other analytical techniques.
+I chose accuracy as the evaluation metric to assess the performance of this solution. Accuracy is how close the resulting categorisation is to the correct category. Mathematically, this can be stated as:
 
-## Data Preprocessing
+Accuracy= TP + TN / TP + TN + FP + FN
 
-Outline the steps taken to preprocess the data, including any cleaning, transformation, or feature engineering techniques employed. Provide a clear and concise description of each preprocessing step and its purpose.
+There are other possible metrics such as specificity and sensitivity, but there are no requirements within the context of this model for a higher proportion of true positives or true negatives.
 
-## Modeling
+### Data Preprocessing
 
-Present the details of the chosen model or models used in the project. Explain the underlying algorithms and any specific considerations or modifications made. Include relevant code snippets or pseudocode for clarity.
+The images were preprocessed by loading the RGB image as a PIL Image type, converting the PIL Image type to a 3D tensor with shape (224, 224, 3) then converting the 3D tensor to 4D tensor with shape (1, 224, 224, 3) and returning a 4D tensor. I did also do some data augmentation for one of the models (random flip and rotation) to expand the dataset, but this was not used in the final model.
+
+### Modelling
+
+The model I used in this project was a CNN, I started with a basic CNN which had low accuracy and then used a pre-trained VGG16 model that I retraiend using transfer learning, the final model was a RESNET-50 model that was trained further using transfer learning on the dataset training set and validated on the validation set.
 
 ## Hyperparameter Tuning
 
-Describe the process of hyperparameter tuning for the selected model. Discuss the techniques used, such as grid search or random search, and explain the rationale behind the chosen hyperparameter values.
+The models are trained using the sklearn fit function with categorical_crossentropy as the loss function and accuracy as the metric using several epochs, if the model improves its validation loss then the saved model is updated with the new model until all epochs are completed.
 
-## Results
 
-Present the results of the model evaluation and performance. Include relevant metrics, visualizations, or other outputs that demonstrate the effectiveness of the solution. Interpret the results and highlight key insights or observations.
+## Results and Comparison Table
+SO there are three main models that we are looking at to do the final identification of dog breed, we can see here that CNN with no pretraining is the least effective, we then have a VGG16 pretrained model that has 70.57% accuracy and finally the Resnet Model with 80.98% accuracy. This is the best accuracy as it is the highest but not so high that it may be overfitted and is good for the context that the model will be used in.
 
-## Comparison Table
+| Model								 |Accuracy|
+|------------------------------------|--------|
+|No pretraining model Test accuracy: |12.92%|
+|Pretrained VGG16 Model Test accuracy| 70.57% |
+|Pretrained Resnet2 Model Test accuracy:| 80.98%|
 
-Provide a comprehensive comparison table that compares the performance of different models or variations within the project. Include relevant metrics and other relevant information to facilitate easy comparison.
-Conclusion: Summarize the key findings, insights, and conclusions derived from the project. Recap the main points and emphasize the success of the proposed solution. Discuss the implications or potential applications of the project's outcomes.
 
 ## Improvements
 
-Identify any limitations, challenges, or areas for improvement in the project. Discuss potential enhancements or future directions that could further enhance the solution or address any remaining gaps.
+Some of the limitations of this model is the slow speed it takes to classify an image, this may become even more of a problem when the model is running in the cloud, therefore it may be worth trying out a model using [MobileNets](https://research.google/blog/mobilenets-open-source-models-for-efficient-on-device-vision/) this would mean a much smaller model that could run faster and more efficiently even on a mobile device. I also think the app could be improved by making it more mobile friendly and making the UI more interesting, this could be done with custom CSS.
 
 ## Acknowledgment
 
-Acknowledge any individuals, organizations, or resources that have contributed to the project's success. Express gratitude and recognition for their support, guidance, or contributions.
+Thank you to the Udacity Data Science Course team for providing me with the knowledge and skills to create this project, thank you to the StackOverflow, Flask and AI community for providing the documentation, support and knowledge to help me when I stuck.
